@@ -56,6 +56,7 @@ Bash
 cd terraform
 terraform init
 terraform apply -auto-approve
+
 4. Verify Global Routing
 Once the apply is complete, your local "Cloud" is live. You can check the status of your regional containers:
 
