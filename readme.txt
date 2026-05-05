@@ -1,8 +1,4 @@
 
-To make your GitHub repository professional and easy for recruiters or peers to understand, your README should clearly explain the "Global" architecture you've built. Since you are a Computer Engineering student focused on DevOps, this README highlights your ability to use Infrastructure as Code (IaC) and Containerization.
-
-Here is a high-quality README.md file you can copy and paste into your project:
-
 🚀 Global High-Availability E-commerce Infrastructure
 This project simulates a Production-Grade, Multi-Region Cloud Architecture entirely on a local machine using Docker and Terraform. It bypasses traditional cloud sandbox restrictions to demonstrate deep knowledge of networking, high availability, and Infrastructure as Code (IaC).
 
