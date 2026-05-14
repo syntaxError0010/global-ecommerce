@@ -40,11 +40,11 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/global-ecommerce-backend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/global-ecommerce-backend:latest
 
       - name: Build and Push Frontend
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/global-ecommerce-frontend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/global-ecommerce-frontend:latest
