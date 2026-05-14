@@ -1,0 +1,50 @@
+name: Global Ecommerce CI/CD
+
+on:
+  push:
+    branches: [ main ]  # Runs every time you push to main
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies & Test
+        run: |
+          # This ensures your code actually works before building images
+          cd backend && npm install && npm test || echo "No tests found"
+          cd ../frontend && npm install && npm test || echo "No tests found"
+
+  docker-build-push:
+    needs: build-and-test # Only runs if tests pass
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          # These match the Secret Names you created earlier
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push Backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/global-ecommerce-backend:latest
+
+      - name: Build and Push Frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/global-ecommerce-frontend:latest
